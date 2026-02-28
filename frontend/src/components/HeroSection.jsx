@@ -21,7 +21,7 @@ const HeroSection = () => {
       <div className='flex flex-col gap-5 my-10'>
         <span className=' mx-auto px-4 py-2 rounded-full bg-gray-100 text-[#F83002] font-medium'>No. 1 Job Hunt Website</span>
         <h1 className='text-5xl font-bold'>Search, Apply & <br /> Get Your <span className=' text-[#F83002]'>Dream Jobs</span></h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus id, illum earum dicta tempore porro omnis sequi quam quas dolore atque magnam error fuga nihil aliquid a iste, quod unde!</p>
+        <p>Welcome to JobPortal, where we bridge the gap between ambition and opportunity. Our mission is to empower professionals by providing a seamless, intuitive, and efficient way to discover their next career milestone. Whether you are a fresh graduate looking for your first role or an experienced leader seeking a new challenge, we provide the tools and connections to help you succeed.</p>
         <div className='flex w-[40%] shadow-lg border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto'>
           <input
             type='text'
