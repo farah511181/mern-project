@@ -9,15 +9,12 @@ import JobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
 import authRoutes from './routes/auth.route.js'
 import path from "path";
-import { fileURLToPath } from "url";   // ✅ added
+
 
 dotenv.config({});
 
 const app = express();
-
-// ✅ FIX: correct __dirname for ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const _dirname = path.resolve();
 
 //middleware
 app.use(express.json());
@@ -40,15 +37,13 @@ app.use("/api/v1/job", JobRoute);
 app.use("/api/v1/application", applicationRoute);
 app.use("/api/v1/auth", authRoutes);
 
-// ✅ FIX: correct frontend path
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
+app.use(express.static(path.join(_dirname, "../frontend/dist")));
 app.get('*',(_, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+    res.sendFile(path.resolve(_dirname, "..frontend", "dist", "index.html"));
 });
 
 
 app.listen(PORT,()=>{
      connectDB();
     console.log(`Server running at port ${PORT}`);
-});
+})
