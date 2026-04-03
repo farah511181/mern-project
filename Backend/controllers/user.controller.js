@@ -8,22 +8,22 @@ import cloudinary from "../utils/Cloudinary.js";
 
 export const register = async (req, res) => {
     try {
-        console.log("✅ Register API hit hua");
+        console.log(" Register API hit hua");
 
         const { fullname, email, phoneNumber, password, role } = req.body;
-        console.log("🟡 req.body:", req.body);
+        console.log(" req.body:", req.body);
         if (!fullname || !email || !phoneNumber || !password || !role) {
-            console.log("❌ Required fields missing in request");
+            console.log(" Required fields missing in request");
             return res.status(400).json({
                 message: "Something is missing",
                 success: false
             });
         };
         const file = req.file;
-        console.log("🟡 req.file:", file);
+        console.log(" req.file:", file);
 
         if (!file) {
-            console.log("❌ File not provided");
+            console.log(" File not provided");
             return res.status(400).json({
                 message: "Profile picture is required",
                 success: false
@@ -31,10 +31,10 @@ export const register = async (req, res) => {
         }
 
         const fileUri = getDataUri(file);
-        console.log("🟢 fileUri:", fileUri);
+        console.log(" fileUri:", fileUri);
 
         const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
-            resource_type: "auto",  // 🔥 IMPORTANT for PDFs
+            resource_type: "auto",  // IMPORTANT for PDFs
             folder: "resumes",     // (optional) for better structure
         });
 
@@ -42,7 +42,7 @@ export const register = async (req, res) => {
 
         const user = await User.findOne({ email });
         if (user) {
-            console.log("❌ User already exists");
+            console.log(" User already exists");
             return res.status(400).json({
                 message: 'User already exists with this email.',
                 success: false,
@@ -50,7 +50,7 @@ export const register = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log("🔐 Password hashed successfully");
+        console.log(" Password hashed successfully");
 
         await User.create({
             fullname,
@@ -63,14 +63,14 @@ export const register = async (req, res) => {
             }
         });
 
-        console.log("✅ New user created successfully");
+        console.log(" New user created successfully");
         return res.status(201).json({
             message: "Account created successfully",
             success: true,
         });
 
     } catch (error) {
-        console.log("🔥 Register API Error:", error);
+        console.log(" Register API Error:", error);
         return res.status(500).json({
             message: "Internal Server Error",
             success: false

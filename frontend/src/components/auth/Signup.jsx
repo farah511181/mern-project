@@ -80,13 +80,11 @@ const Signup = () => {
         }
 
         try {
-            dispatch(setLoading(true));
-            const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                withCredentials: true
-            });
+           dispatch(setLoading(true));
+
+const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+    withCredentials: true
+});
 
 
             if (res.data.success) {
