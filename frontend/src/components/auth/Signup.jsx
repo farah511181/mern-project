@@ -72,7 +72,7 @@ const Signup = () => {
         formData.append('role', input.role);
         if (input.file) {
             console.log("✅ input.file:", input.file); // 👈 Ye line add karo
-            formData.append('file', input.file);
+            formData.append('profilePhoto', input.file);
         } else {
         }
 
